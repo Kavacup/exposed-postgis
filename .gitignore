@@ -1,6 +1,9 @@
 /.idea/
+/.gradle
 /gradle/.tmp/
 /gradle/caches/
 /gradle/daemon/
 /gradle/kotlin-profile/
 /gradle/native/
+/build
+/lib/build

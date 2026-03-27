@@ -20,7 +20,7 @@ subprojects {
 }
 
 allprojects {
-    group = "io.github.nikitok"
+    group = "io.github.kavacup"
     version = "0.4"
 
     repositories {

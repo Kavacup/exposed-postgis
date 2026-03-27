@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "propertium"
+rootProject.name = "exposed-postgis"
 
 include("lib")
 

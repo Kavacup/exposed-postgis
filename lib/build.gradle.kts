@@ -55,3 +55,34 @@ val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            artifactId = "exposed-postgis"
+
+            artifact(tasks.named("dokkaJavadocJar"))
+            artifact(sourcesJar)
+
+            pom {
+                name.set("extension-exposed-postgis")
+                description.set("extension-exposed-postgis is a Kotlin library built on top of Exposed to support PostGIS-enabled PostgreSQL databases. This library provides seamless and type-safe integration for spatial data manipulation.")
+                url.set("https://github.com/propertium/exposed-postgis.git")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://mit-license.org/")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("kavacup")
+                        name.set("Andrej Levitzki")
+                        email.set("levitzkiandrey@gmail.com")
+                    }
+                }
+            }
+        }
+    }
+}
