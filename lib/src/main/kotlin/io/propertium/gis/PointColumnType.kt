@@ -2,16 +2,8 @@ package io.propertium.gis
 
 
 import net.postgis.jdbc.PGbox2d
-import net.postgis.jdbc.PGgeometry
 import net.postgis.jdbc.geometry.Point
-import org.h2gis.functions.spatial.create.ST_MakePoint
-import org.h2gis.functions.spatial.crs.ST_SetSRID
-import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
-import org.jetbrains.exposed.sql.vendors.H2Dialect
-import org.jetbrains.exposed.sql.vendors.currentDialect
-import org.postgresql.util.PGobject
-import java.sql.ResultSet
+import org.jetbrains.exposed.v1.core.*
 
 fun Table.point(name: String, srid: Int = 4326): Column<Point> = registerColumn(name, PointColumnType(srid))
 infix fun ExpressionWithColumnType<*>.StWithin(box: Expression<*>) : Op<Boolean> = StWithin(this, box)
@@ -20,7 +12,7 @@ fun ExpressionWithColumnType<*>.inEnvelope(box: PGbox2d, boxSrid:Int, columnSrid
 fun ExpressionWithColumnType<*>.intersects(points: Array<Point>, boxSrid:Int, columnSrid: Int) : Op<Boolean> = MakeInrersects(this, points, boxSrid, columnSrid)
 
 
-private class PointColumnType(val srid: Int = 4326): org.jetbrains.exposed.sql.ColumnType<net.postgis.jdbc.geometry.Point>() {
+private class PointColumnType(val srid: Int = 4326): ColumnType<Point>() {
     override fun sqlType() = "GEOMETRY(POINT, $srid)"
     override fun valueFromDB(value: Any): Point? {
         return value as? Point

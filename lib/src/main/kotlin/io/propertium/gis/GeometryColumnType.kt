@@ -6,8 +6,8 @@ import net.postgis.jdbc.geometry.Geometry
 import net.postgis.jdbc.geometry.GeometryCollection
 import net.postgis.jdbc.geometry.MultiPolygon
 import net.postgis.jdbc.geometry.Point
-import org.jetbrains.exposed.sql.*
-
+import org.jetbrains.exposed.v1.core.*
+import org.jetbrains.exposed.v1.jdbc.Query
 
 fun Table.geometry(name: String, srid: Int = 3857): Column<Geometry> = registerColumn(name, GeometryColumnType(srid))
 infix fun ExpressionWithColumnType<*>.st_contains(box: Point) : Op<Boolean> = StContainsOp(this, box)

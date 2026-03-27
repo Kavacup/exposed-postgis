@@ -6,7 +6,7 @@ kotlinx-serialization-json = "1.7.3"
 kotlinx-coroutines-core = "1.9.0"
 logback = "1.5.12"
 kotlinx-rpc = "0.4.0"
-exposed-version = "0.57.0"
+exposed-version = "1.1.1"
 exposed-postgis-version = "0.4"
 microutils-version = "3.0.5"
 
@@ -42,8 +42,8 @@ exposed-postgis = { module = "io.github.nikitok:exposed-postgis", version.ref = 
 #pg
 
 #pg
-postgresql = { module = "org.postgresql:postgresql", version = "42.7.4" }
-postgis-jdbc = { module = "net.postgis:postgis-jdbc", version = "2023.1.0" }
+postgresql = { module = "org.postgresql:postgresql", version = "42.7.10" }
+postgis-jdbc = { module = "net.postgis:postgis-jdbc", version = "2025.1.1" }
 
 # ktor
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }

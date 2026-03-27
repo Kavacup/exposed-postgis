@@ -12,10 +12,10 @@ repositories {
 }
 
 dependencies {
-    implementation("net.postgis:postgis-jdbc:2023.1.0") {
+    implementation("net.postgis:postgis-jdbc:2025.1.1") {
         exclude(module = "postgresql")
     }
-    implementation("org.postgresql:postgresql:42.7.4")
+    implementation("org.postgresql:postgresql:42.7.10")
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
@@ -54,56 +54,4 @@ tasks.register<Jar>("dokkaJavadocJar") {
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            artifactId = "exposed-postgis"
-
-            artifact(tasks.named("dokkaJavadocJar"))
-            artifact(sourcesJar)
-
-            pom {
-                name.set("extension-exposed-postgis")
-                description.set("extension-exposed-postgis is a Kotlin library built on top of Exposed to support PostGIS-enabled PostgreSQL databases. This library provides seamless and type-safe integration for spatial data manipulation.")
-                url.set("https://github.com/propertium/exposed-postgis.git")
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://mit-license.org/")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("nikitok")
-                        name.set("Nikita Navalikhin")
-                        email.set("noviiden@gmail.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:https://github.com/propertium/exposed-postgis.git")
-                    developerConnection.set("scm:git:git@github.com:propertium.git")
-                    url.set("https://github.com/propertium")
-                }
-            }
-        }
-    }
-}
-
-
-mavenCentral {
-    authToken = project.property("ossrhToken") as String
-    publishingType = "AUTOMATIC"
-    maxWait = 60
-}
-
-signing {
-    useInMemoryPgpKeys(
-        project.property("signing.keyId") as String,
-        file(project.property("signing.secretKeyRingFile") as String).readText(),
-        project.property("signing.password") as String
-    )
-    sign(publishing.publications["maven"])
 }
