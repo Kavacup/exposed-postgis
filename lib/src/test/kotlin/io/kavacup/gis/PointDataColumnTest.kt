@@ -1,7 +1,7 @@
-package io.propertium.gis
+package io.kavacup.gis
 
 
-import io.propertium.gis.models.PointData
+import io.kavacup.gis.models.PointData
 import org.jetbrains.exposed.v1.core.*
 import org.jetbrains.exposed.v1.jdbc.*
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction

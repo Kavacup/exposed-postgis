@@ -1,3 +1,3 @@
-package io.propertium.gis.models
+package io.kavacup.gis.models
 
 data class PointData(val x: Double, val y: Double, val srid: Int = 4326)

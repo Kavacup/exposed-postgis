@@ -1,6 +1,6 @@
-package io.propertium.gis
+package io.kavacup.gis
 
-import io.propertium.gis.models.PointData
+import io.kavacup.gis.models.PointData
 import org.jetbrains.exposed.v1.core.*
 import org.jetbrains.exposed.v1.core.statements.InsertStatement
 import org.jetbrains.exposed.v1.core.vendors.H2Dialect
@@ -8,6 +8,7 @@ import org.jetbrains.exposed.v1.core.vendors.PostgreSQLDialect
 import org.jetbrains.exposed.v1.core.vendors.currentDialect
 import org.locationtech.jts.geom.Coordinate
 import org.locationtech.jts.geom.GeometryFactory
+import org.locationtech.jts.geom.Point
 import org.locationtech.jts.io.WKTReader
 import org.locationtech.jts.io.WKTWriter
 
@@ -32,7 +33,7 @@ private class PointDataColumnType(val srid: Int = 4326) : ColumnType<PointData>(
 
     override fun valueFromDB(value: Any): PointData? {
         return when (value) {
-            is org.locationtech.jts.geom.Point ->
+            is Point ->
                 PointData(value.x, value.y, value.srid)
 
             is net.postgis.jdbc.geometry.Point ->

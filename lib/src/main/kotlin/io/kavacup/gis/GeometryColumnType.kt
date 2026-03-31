@@ -1,4 +1,4 @@
-package io.propertium.gis
+package io.kavacup.gis
 
 import net.postgis.jdbc.PGbox2d
 import net.postgis.jdbc.PGgeometry

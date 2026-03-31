@@ -1,4 +1,4 @@
-package io.propertium.gis
+package io.kavacup.gis
 
 import org.jetbrains.exposed.v1.core.*
 
