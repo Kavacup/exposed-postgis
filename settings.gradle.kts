@@ -4,7 +4,6 @@ rootProject.name = "exposed-postgis"
 
 include("lib")
 
-
 pluginManagement {
     repositories {
         gradlePluginPortal()

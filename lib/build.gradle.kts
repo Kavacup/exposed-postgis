@@ -29,6 +29,7 @@ dependencies {
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockk)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
@@ -36,7 +37,11 @@ tasks.test {
 }
 
 mavenPublishing {
-    coordinates("io.github.kavacup.exposed-postgis")
+    coordinates(
+        groupId=group as String,
+        artifactId=rootProject.name,
+        version=version as String
+    )
     pom {
         name.set("extension-exposed-postgis")
         description.set("extension-exposed-postgis is a Kotlin library built on top of Exposed to support PostGIS-enabled PostgreSQL databases. This library provides seamless and type-safe integration for spatial data manipulation.")
