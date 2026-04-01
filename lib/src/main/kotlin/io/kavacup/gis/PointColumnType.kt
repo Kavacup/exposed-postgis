@@ -2,6 +2,7 @@ package io.kavacup.gis
 
 
 import net.postgis.jdbc.PGbox2d
+import net.postgis.jdbc.PGgeometry
 import net.postgis.jdbc.geometry.Point
 import org.jetbrains.exposed.v1.core.*
 
@@ -14,8 +15,10 @@ fun ExpressionWithColumnType<*>.intersects(points: Array<Point>, boxSrid:Int, co
 
 private class PointColumnType(val srid: Int = 4326): ColumnType<Point>() {
     override fun sqlType() = "GEOMETRY(POINT, $srid)"
-    override fun valueFromDB(value: Any): Point? {
-        return value as? Point
+    override fun valueFromDB(value: Any): Point? = when (value) {
+        is PGgeometry -> (value.geometry as? Point)
+        is Point -> value
+        else -> null
     }
 
     override fun notNullValueToDB(value: Point): Any {
