@@ -21,9 +21,7 @@ private class PointColumnType(val srid: Int = 4326): ColumnType<Point>() {
         else -> null
     }
 
-    override fun notNullValueToDB(value: Point): Any {
-        return value
-    }
+    override fun notNullValueToDB(value: Point): Any = PGgeometry(value)
 }
 
 private class MakeInrersects(val expr1: Expression<*>, val points: Array<Point>, val boxSrid:Int = 4326, val columnSrid: Int = 4326) : Op<Boolean>() {
